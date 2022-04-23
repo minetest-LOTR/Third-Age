@@ -1,4 +1,4 @@
-![header](https://raw.githubusercontent.com/minetest-LOTR/Lord-of-the-Test/v2-rewrite/menu/header.png)
+![header](https://raw.githubusercontent.com/minetest-LOTR/Third-Age/master/menu/header.png)
 ## Lord of the Test: Third Age - A minetest subgame
 ### Version: Alpha
 
