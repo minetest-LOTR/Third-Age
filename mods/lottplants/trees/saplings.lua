@@ -96,10 +96,10 @@ end
 
 local function register_sapling(name, box, time_min, time_max)
     if not time_min then
-        time_min = 3
+        time_min = 300
     end
     if not time_max then
-        time_max = 5
+        time_max = 1500
     end
     if not box then
         box = {
