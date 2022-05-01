@@ -1,7 +1,4 @@
-This list shows which license each texture falls under, and its source.
-Every effort has been made to ensure its accuracy, but some things may
-have been misattributed, or missed altogether. If you see something like
-this, please let me know, so it can be fixed!
+This list shows which license each texture falls under, and its source:
 
 CC BY-SA 3.0
 Copyright (C) 2014-2016 RHRhino
@@ -29,9 +26,15 @@ Copyright (C) 2013 Vanessa Ezekowitz
 	lottplants_poplar_leaves.png
 	lottplants_poplar_trunk.png
 	lottplants_poplar_trunk_top.png
+	lottplants_poplar_sapling.png
 Copyright (C) 2013 Gambit
 	lottplants_menelluin.png
 Copyright (C) 2015 philipbenr
+	lottplants_alder_leaves.png
+	lottplants_alder_planks.png
+	lottplants_alder_trunk.png
+	lottplants_alder_trunk_top.png
+	lottplants_alder_sapling.png
 	lottplants_birch_leaves.png
 	lottplants_birch_planks.png
 	lottplants_birch_trunk.png
@@ -119,6 +122,7 @@ Copyright (C) 2013 Cisoun
 	lottplants_oak_leaves.png
 	lottplants_oak_trunk.png
 	lottplants_oak_trunk_top.png
+	lottplants_oak_sapling.png
 Copyright (C) 2013 PlizAdam
 	lottplants_jungle_leaves.png
 	lottplants_jungle_planks.png

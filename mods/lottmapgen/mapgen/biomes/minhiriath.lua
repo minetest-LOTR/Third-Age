@@ -32,10 +32,7 @@ lottmapgen.register_biome(9, {
 			elseif math.random(PLANT6) == 3 then
 				lottmapgen.basic_flowers(data, vi, p2data)
 			elseif math.random(TREE6) == 3 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:elm_trunk",
-					"lottplants:elm_leaves",
-					math.random(7, 9))
+				lottmapgen.elm_tree(x, y, z, area, data)
 			end
 		elseif noise2 < -0.4 then
 			if noise > -0.3 then
@@ -49,11 +46,9 @@ lottmapgen.register_biome(9, {
 				elseif math.random(TREE5) == 5 then
 					lottmapgen.alder_tree(x, y, z, area, data)
 				elseif math.random(TREE7) == 4 then
-					lottmapgen.generate_tall_tree(x, y, z, area, data,
-						"lottplants:elm_trunk",
-						"lottplants:elm_leaves")
+					lottmapgen.elm_tree(x, y, z, area, data)
 				elseif math.random(TREE6) == 3 then
-					lottmapgen.short_elm_tree(x, y, z, area, data)
+					lottmapgen.elm_tree(x, y, z, area, data)
 				elseif math.random(TREE8) == 8 then
 					lottmapgen.generate_log(x, y, z, area, data, p2data,
 						"lottplants:oak_trunk",
@@ -64,7 +59,7 @@ lottmapgen.register_biome(9, {
 						math.random(2, 3))
 				elseif math.random(TREE9) == 10 then
 					lottmapgen.generate_log(x, y, z, area, data, p2data,
-						"lottplants:elm_log",
+						"lottplants:elm_trunk",
 						math.random(2, 4))
 				elseif math.random(PLANT7) == 9 then
 					lottmapgen.leaf_litter(x, y, z, area, data)
@@ -105,11 +100,7 @@ lottmapgen.register_biome(9, {
 					"lottplants:oak_leaves",
 					math.random(4, 6))
 			elseif math.random(TREE10) == 4 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:apple_trunk",
-					"lottplants:apple_leaves",
-					math.random(4, 6),
-					"lottitems:apple")
+				lottmapgen.apple_tree(x, y, z, area, data)
 			end
 		end
 	end,

@@ -51,11 +51,7 @@ lottmapgen.register_biome(27, {
 					"lottplants:oak_trunk",
 					"lottplants:oak_leaves")
 			elseif math.random(TREE10) == 6 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:apple_trunk",
-					"lottplants:apple_leaves",
-					math.random(5, 6),
-					"lottitems:apple")
+				lottmapgen.apple_tree(x, y, z, area, data)
 			elseif math.random(PLANT3) == 3 then
 				lottmapgen.grass(data, vi, p2data)
 			elseif math.random(PLANT7) == 2 then

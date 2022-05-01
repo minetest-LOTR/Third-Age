@@ -15,30 +15,18 @@ lottmapgen.register_biome(22, {
 	deco = function(data, p2data, vi, area, x, y, z, noise, noise2)
 		if noise2 < -0.6 then
 			if math.random(TREE3) == 1 then
-				lottmapgen.generate_tall_tree(x, y, z, area, data,
-					"lottplants:cedar_trunk",
-					"lottplants:cedar_leaves")
+				lottmapgen.cedar_tree(x, y, z, area, data)
 			elseif math.random(TREE5) == 5 then
-				lottmapgen.generate_large_tree(x, y, z, area, data,
-					"lottplants:cedar_trunk",
-					"lottplants:cedar_leaves",
-					math.random(7, 9))
+				lottmapgen.cedar_tree(x, y, z, area, data)
 			elseif math.random(TREE4) == 1 then
 				lottmapgen.generate_tree(x, y, z, area, data,
 					"lottplants:oak_trunk",
 					"lottplants:oak_leaves",
 					math.random(4, 5))
 			elseif math.random(TREE7) == 2 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:oak_trunk",
-					"lottplants:oak_leaves",
-					math.random(4, 5),
-					"lottitems:apple")
+				lottmapgen.apple_tree(x, y, z, area, data)
 			elseif math.random(TREE6) == 7 then
-				lottmapgen.generate_large_tree(x, y, z, area, data,
-					"lottplants:rowan_trunk",
-					"lottplants:rowan_leaves",
-					math.random(7, 9))
+				lottmapgen.rowan_tree(x, y, z, area, data)
 			elseif math.random(PLANT4) == 3 then
 				lottmapgen.grass(data, vi, p2data)
 			elseif math.random(PLANT6) == 4 then
@@ -86,9 +74,7 @@ lottmapgen.register_biome(22, {
 						lottmapgen.basic_flowers(data, vi, p2data)
 					end
 				elseif math.random(TREE9) == 4 then
-					lottmapgen.generate_tall_tree(x, y, z, area, data,
-						"lottplants:cedar_trunk",
-						"lottplants:cedar_leaves")
+					lottmapgen.cedar_tree(x, y, z, area, data)
 				elseif math.random(TREE10) == 5 then
 					lottmapgen.ruin(x, y, z, area, data, c_red_cobble, c_red_bricks)
 				elseif math.random(PLANT13) == 6 then

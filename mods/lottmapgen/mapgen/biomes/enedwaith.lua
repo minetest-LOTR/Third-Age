@@ -11,14 +11,9 @@ lottmapgen.register_biome(11, {
 	deco = function(data, p2data, vi, area, x, y, z, noise, noise2)
 		if noise2 > 0.25 then
 			if math.random(TREE4) == 2 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:birch_trunk",
-					"lottplants:birch_leaves",
-					math.random(5, 7))
+				lottmapgen.birch_tree(x, y, z, area, data)
 			elseif math.random(TREE5) == 3 then
-				lottmapgen.generate_tall_tree(x, y, z, area, data,
-					"lottplants:birch_trunk",
-					"lottplants:birch_leaves")
+				lottmapgen.birch_tree(x, y, z, area, data)
 			elseif math.random(TREE5) == 2 then
 				lottmapgen.generate_tree(x, y, z, area, data,
 					"lottplants:oak_trunk",
@@ -31,9 +26,7 @@ lottmapgen.register_biome(11, {
 			elseif math.random(PLANT7) == 4 then
 				lottmapgen.basic_flowers(data, vi, p2data)
 			elseif math.random(TREE9) == 2 then
-				lottmapgen.generate_tall_tree(x, y, z, area, data,
-					"lottplants:elm_trunk",
-					"lottplants:elm_leaves")
+				lottmapgen.elm_tree(x, y, z, area, data)
 			elseif math.random(TREE8) == 5 then
 				lottmapgen.generate_log(x, y, z, area, data, p2data,
 					"lottplants:birch_trunk",

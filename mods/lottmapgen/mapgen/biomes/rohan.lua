@@ -24,8 +24,7 @@ lottmapgen.register_biome(17, {
 				lottmapgen.grass(data, vi, p2data)
 			elseif noise < -0.3 and noise > -0.4 then
 				if math.random(TREE4) == 4 then
-					lottmapgen.generate_tall_tree(x, y, z, area, data,
-						"lottplants:poplar_trunk", "lottplants:poplar_leaves")
+					lottmapgen.poplar_tree(x, y, z, area, data)
 				end
 			elseif math.random(PLANT13) == 1 then
 				table.insert(schems, {"test.mts",
@@ -54,9 +53,7 @@ lottmapgen.register_biome(17, {
 				end
 			elseif noise < -0.4 then
 				if math.random(TREE3) == 3 then
-					lottmapgen.generate_tree(x, y, z, area, data,
-						"lottplants:alder_trunk",
-						"lottplants:alder_leaves", math.random(5, 6))
+					lottmapgen.alder_tree(x, y, z, area, data)
 				elseif math.random(TREE5) == 4 then
 					lottmapgen.generate_bush(x, y, z, area, data,
 						"lottplants:alder_trunk",

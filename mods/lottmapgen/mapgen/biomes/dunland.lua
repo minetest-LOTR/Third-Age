@@ -12,8 +12,7 @@ lottmapgen.register_biome(13, {
 				lottmapgen.generate_tree(x, y, z, area, data,
 					"lottplants:oak_trunk", "lottplants:oak_leaves", 4)
 			elseif math.random(TREE4) == 5 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:rowan_trunk", "lottplants:rowan_leaves", 5)
+				lottmapgen.rowan_tree(x, y, z, area, data)
 			elseif math.random(TREE8) == 6 then
 				lottmapgen.generate_large_tree(x, y, z, area, data,
 					"lottplants:maple_trunk", "lottplants:maple_leaves", 7)
@@ -27,7 +26,7 @@ lottmapgen.register_biome(13, {
 				lottmapgen.generate_log(x, y, z, area, data, p2data,
 					"lottplants:maple_trunk", 3)
 			elseif math.random(TREE7) == 3 then
-				lottmapgen.apple_tree2(x, y, z, area, data)
+				lottmapgen.apple_tree(x, y, z, area, data)
 			elseif math.random (PLANT5) == 4 then
 				lottmapgen.grass(data, vi, p2data)
 			elseif math.random(PLANT6) == 9 then
@@ -40,8 +39,7 @@ lottmapgen.register_biome(13, {
 				lottmapgen.generate_tree(x, y, z, area, data,
 					"lottplants:oak_trunk", "lottplants:oak_leaves", 4)
 			elseif math.random(TREE7) == 3 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:rowan_trunk", "lottplants:rowan_leaves", 5)
+				lottmapgen.rowan_tree(x, y, z, area, data)
 			elseif math.random(TREE9) == 6 then
 				lottmapgen.generate_large_tree(x, y, z, area, data,
 					"lottplants:maple_trunk", "lottplants:maple_leaves", 7)

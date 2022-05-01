@@ -2,7 +2,7 @@ minetest.register_node("lottitems:apple", {
 	description = "Apple",
 	drawtype = "plantlike",
 	tiles = {"lottitems_apple.png"},
-	inventory_image = "lottitems_apple.png",
+	inventory_image = "lottitems_apple_inv.png",
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,

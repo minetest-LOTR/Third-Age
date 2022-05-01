@@ -48,10 +48,7 @@ lottmapgen.register_biome(7, {
 					elseif math.random(PLANT7) == 4 then
 						lottmapgen.gerberae(data, vi, p2data)
 					elseif math.random(TREE7) == 4 then
-						lottmapgen.generate_tree(x, y, z, area, data,
-							"lottplants:birch_trunk",
-							"lottplants:birch_leaves",
-							math.random(5, 7))
+						lottmapgen.birch_tree(x, y, z, area, data)
 					end
 				else
 					if math.random(PLANT2) == 3 then
@@ -70,10 +67,7 @@ lottmapgen.register_biome(7, {
 					elseif math.random(TREE10) == 4 then
 						lottmapgen.rowan_tree(x, y, z, area, data)
 					elseif math.random(TREE10) == 7 then
-						lottmapgen.generate_tree(x, y, z, area, data,
-							"lottplants:birch_trunk",
-							"lottplants:birch_leaves",
-							math.random(5, 7))
+						lottmapgen.birch_tree(x, y, z, area, data)
 					elseif math.random(TREE9) == 4 then
 						lottmapgen.generate_bush(x, y, z, area, data,
 							"lottplants:rowan_trunk", "lottplants:rowan_leaves")
@@ -90,6 +84,8 @@ lottmapgen.register_biome(7, {
 						"lottplants:birch_trunk",
 						"lottplants:birch_leaves",
 						math.random(5, 7))
+				elseif math.random(TREE7) == 7 then
+					lottmapgen.birch_tree(x, y, z, area, data)
 				elseif math.random(TREE4) == 3 then
 					lottmapgen.generate_tree(x, y, z, area, data,
 						"lottplants:oak_trunk", "lottplants:oak_leaves", 4)

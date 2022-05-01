@@ -31,7 +31,7 @@ lottmapgen.register_biome(14, {
 				lottmapgen.generate_tree(x, y, z, area, data, "lottplants:dark_oak_trunk",
 					"lottplants:dark_oak_leaves", math.random(5, 6))
 			elseif math.random(TREE1) == 3 then
-				lottmapgen.large_oak_tree(x, y, z, area, data)
+				lottmapgen.dark_oak_tree(x, y, z, area, data)
 			elseif math.random(TREE2) == 4 then
 				lottmapgen.generate_bush(x, y, z, area, data, "lottplants:dark_oak_trunk",
 					"lottplants:dark_oak_leaves")

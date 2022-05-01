@@ -377,26 +377,216 @@ end
 
 function lottmapgen.generate_large_tree(x, y, z, area, data, tree, leaves, height)
 	local c_tree = minetest.get_content_id(tree)
-        local c_leaves = minetest.get_content_id(leaves)
-        for j = -2, height do
-                if j >= (height - 4) then
-                        local rad = j - height + 4
-                        for i = -rad, rad do
-                        for k = -rad, rad do
-                                if math.abs(i) + math.abs(k) < rad * 2 - 1 then
-                                        local vil = area:index(x + i, y + j + 1, z + k)
-                                        if math.random(48) == 2 then
-                                                data[vil] = c_leaves
-                                        elseif math.random(3) ~= 2 then
-                                                data[vil] = c_leaves
-                                        end
-                                end
-                        end
-                        end
-                end
-                local vit = area:index(x, y + j, z)
-                data[vit] = c_tree
-        end
+	local c_leaves = minetest.get_content_id(leaves)
+	for j = -2, height do
+			if j >= (height - 4) then
+					local rad = j - height + 4
+					for i = -rad, rad do
+					for k = -rad, rad do
+							if math.abs(i) + math.abs(k) < rad * 2 - 1 then
+									local vil = area:index(x + i, y + j + 1, z + k)
+									if math.random(48) == 2 then
+											data[vil] = c_leaves
+									elseif math.random(3) ~= 2 then
+											data[vil] = c_leaves
+									end
+							end
+					end
+					end
+			end
+			local vit = area:index(x, y + j, z)
+			data[vit] = c_tree
+	end
+end
+
+function lottmapgen.maple_tree(x, y, z, area, data)
+	local c_tree = minetest.get_content_id("lottplants:maple_trunk")
+	local c_leaves = minetest.get_content_id("lottplants:maple_leaves")
+	local height = math.random(7, 9)
+	for j = -2, height do
+			if j >= (height - 4) then
+					local rad = j - height + 4
+					for i = -rad, rad do
+					for k = -rad, rad do
+							if math.abs(i) + math.abs(k) < rad * 2 - 1 then
+									local vil = area:index(x + i, y + j + 1, z + k)
+									if math.random(48) == 2 then
+											data[vil] = c_leaves
+									elseif math.random(3) ~= 2 then
+											data[vil] = c_leaves
+									end
+							end
+					end
+					end
+			end
+			local vit = area:index(x, y + j, z)
+			data[vit] = c_tree
+	end
+end
+
+function lottmapgen.cedar_tree(x, y, z, area, data)
+	local c_tree = minetest.get_content_id("lottplants:cedar_trunk")
+	local c_leaves = minetest.get_content_id("lottplants:cedar_leaves")
+	local height = math.random(17, 19) 
+	if math.random(2) == 1 then -- Big Tree
+		for j = -3, height do
+			if j == height - 8 or j == height - 7 then
+				for i = -4, 4 do
+				for k = -4, 4 do
+					if math.abs(i) + math.abs(k) < 7 then
+						local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+						if math.random(5) ~= 2 then
+							data[vil] = c_leaves
+						end
+					end
+				end
+				end
+			elseif j == height - 6 or j == height - 5 then
+				for i = -3, 3 do
+				for k = -3, 3 do
+					if math.abs(i) + math.abs(k) < 5 then
+						local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+						if math.random(6) ~= 2 then
+							data[vil] = c_leaves
+						end
+					end
+				end
+				end
+			elseif j == height - 4 or j == height - 3 then
+				for i = -2, 2 do
+				for k = -2, 2 do
+					if math.abs(i) + math.abs(k) < 4 then
+						local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+						if math.random(7) ~= 2 then
+							data[vil] = c_leaves
+						end
+					end
+				end
+				end
+			elseif j == height - 2 or j == height - 1 or j == height then
+				for i = -1, 1 do
+				for k = -1, 1 do
+					local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+					if math.random(9) ~= 2 then
+						data[vil] = c_leaves
+					end
+				end
+				end
+				local vil = area:index(x, y + j + 2, z)
+				data[vil] = c_leaves
+			end
+			local vit = area:index(x, y + j, z)
+			data[vit] = c_tree
+		end
+	else -- Small Tree
+		for j = -2, 10 do
+			if j >= 8 then
+					local rad = 11 - j
+					for i = -rad, rad do
+					for k = -rad, rad do
+							if math.abs(i) + math.abs(k) < rad * 2 - 1 then
+									local vil = area:index(x + i, y + j + 1, z + k)
+									if math.random(48) == 2 then
+											data[vil] = c_leaves
+									elseif math.random(3) ~= 2 then
+											data[vil] = c_leaves
+									end
+							end
+					end
+					end
+			end
+			local vit = area:index(x, y + j, z)
+			data[vit] = c_tree
+		end
+	end
+end
+
+local function ash_branch(x, y, z, area, data)
+	local c_tree = minetest.get_content_id("lottplants:ash_trunk")
+	local c_leaves = minetest.get_content_id("lottplants:ash_leaves")
+	local dir = math.random(4)
+	if dir == 1 then -- +x
+		for i = 1, 4 do
+			for j = -1, 0 do
+			for k = -1, 1 do
+				if math.random(6) ~= 3 then
+					local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+					data[vil] = c_leaves
+				end
+			end
+			end
+			if i ~= 4 then
+				local vit = area:index(x + i, y, z)
+				data[vit] = c_tree
+			end
+		end
+	elseif dir == 2 then -- -x
+		for i = 1, 4 do
+			for j = -1, 0 do
+			for k = -1, 1 do
+				if math.random(6) ~= 3 then
+					local vil = area:index(x - i, y + j + math.random(0, 1), z + k)
+					data[vil] = c_leaves
+				end
+			end
+			end
+			if i ~= 4 then
+				local vit = area:index(x - i, y, z)
+				data[vit] = c_tree
+			end
+		end
+	elseif dir == 3 then -- +z
+		for i = 1, 4 do
+			for j = -1, 0 do
+			for k = -1, 1 do
+				if math.random(6) ~= 3 then
+					local vil = area:index(x - k, y + j + math.random(0, 1), z + i)
+					data[vil] = c_leaves
+				end
+			end
+			end
+			if i ~= 4 then
+				local vit = area:index(x, y, z + i)
+				data[vit] = c_tree
+			end
+		end
+	else -- -z
+		for i = 1, 4 do
+			for j = -1, 0 do
+			for k = -1, 1 do
+				if math.random(6) ~= 3 then
+					local vil = area:index(x - k, y + j + math.random(0, 1), z - i)
+					data[vil] = c_leaves
+				end
+			end
+			end
+			if i ~= 4 then
+				local vit = area:index(x, y, z - i)
+				data[vit] = c_tree
+			end
+		end
+	end
+end
+
+function lottmapgen.ash_tree(x, y, z, area, data, tree, leaves)
+	local c_tree = minetest.get_content_id("lottplants:ash_trunk")
+	local c_leaves = minetest.get_content_id("lottplants:ash_leaves")
+	for j = -3, 17 do
+		if j >= 16 then
+			for i = -3, 3 do
+			for k = -3, 3 do
+				local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+				if math.random(5) ~= 7 then
+					data[vil] = c_leaves
+				end
+			end
+			end
+		elseif j >= 5 and math.random(3) == 3 then
+			ash_branch(x, y + j, z, area, data)
+		end
+		local vit = area:index(x, y + j, z)
+		data[vit] = c_tree
+	end
 end
 
 function lottmapgen.burned_tree(x, y, z, area, data)
@@ -447,19 +637,48 @@ function lottmapgen.perma_dirt(x, y, z, area, data)
 	end
 end
 
-function lottmapgen.apple_tree2(x, y, z, area, data)
+function lottmapgen.apple_tree(x, y, z, area, data)
 	local c_tree = minetest.get_content_id("lottplants:apple_trunk")
 	local c_apple = minetest.get_content_id("lottitems:apple")
 	local c_leaves = minetest.get_content_id("lottplants:apple_leaves")
-	for j = -2, 4 do
-		if j >= 1 then
+	for j = -2, 5 do
+		if j >= 3 then
 			for i = -2, 2 do
 			for k = -2, 2 do
-				local vil = area:index(x + i, y + j + 1, z + k)
-				if math.random(48) == 2 then
-					data[vil] = c_apple
-				elseif math.random(3) ~= 2 then
-					data[vil] = c_leaves
+				if math.abs(i) + math.abs(k) ~= 4 then
+					local vil = area:index(x + i, y + j + 1, z + k)
+					if math.random(4) ~= 2 then
+						data[vil] = c_leaves
+					end
+				end
+			end
+			end
+		elseif j == 2 then
+			for i = -2, 2 do
+			for k = -2, 2 do
+				local ai = math.abs(i)
+				local ak = math.abs(k)
+				if ai + ak < 2 then
+					local vil = area:index(x + i, y + j + 1, z + k)
+					if math.random(5) ~= 2 then
+						data[vil] = c_leaves
+					end
+				elseif ai + ak < 4 then
+					local vil = area:index(x + i, y + j + 1, z + k)
+					if math.random(2) ~= 2 then
+						data[vil] = c_apple
+					end
+				end
+			end
+			end
+		elseif j == 1 then
+			for i = -1, 1 do
+			for k = -1, 1 do
+				if math.abs(i) + math.abs(k) ~= 2 then
+					local vil = area:index(x + i, y + j + 1, z + k)
+					if math.random(2) ~= 2 then
+						data[vil] = c_apple
+					end
 				end
 			end
 			end
@@ -496,8 +715,9 @@ function lottmapgen.rowan_tree(x, y, z, area, data)
 	local c_tree = minetest.get_content_id("lottplants:rowan_trunk")
 	local c_rowanberry = minetest.get_content_id("lottplants:rowan_berries")
 	local c_rowanleaf = minetest.get_content_id("lottplants:rowan_leaves")
-	for j = -2, 4 do
-		if j >= 3 then
+	local height = math.random(4, 5)
+	for j = -2, height do
+		if j >= height - 1 then
 			for i = -3, 3 do
 			for k = -3, 3 do
 				if math.abs(i) + math.abs(k) < 5 then
@@ -511,7 +731,7 @@ function lottmapgen.rowan_tree(x, y, z, area, data)
 			end
 			end
 		end
-		if j == 4 then
+		if j == height then
 			for i = -2, 2 do
 			for k = -2, 2 do
 				if math.abs(i) + math.abs(k) < 3 then
@@ -530,8 +750,6 @@ function lottmapgen.rowan_tree(x, y, z, area, data)
 				end
 			end
 			end
-		end
-		if j == 4 then
 			for i = -2, 2 do
 			for k = -2, 2 do
 				if math.abs(i) + math.abs(k) == 1 then
@@ -627,7 +845,7 @@ function lottmapgen.yavannamire_tree(x, y, z, area, data)
 end
 
 function lottmapgen.default_tree(x, y, z, area, data)
-	local c_tree = minetest.get_content_id("lottplants:oak_tree")
+	local c_tree = minetest.get_content_id("lottplants:oak_trunk")
 	local c_leaves = minetest.get_content_id("lottplants:oak_leaves")
 	for j = -2, 4 do
 		if j >= 1 then
@@ -755,6 +973,8 @@ function lottmapgen.lebethron_tree(x, y, z, area, data)
 	end
 end
 
+
+--TODO Add branches (Just below the top, maybe?)
 function lottmapgen.white_tree(x, y, z, area, data)
 	local c_white_tree = minetest.get_content_id("lottplants:white_tree_trunk")
 	local c_white_leaves = minetest.get_content_id("lottplants:white_tree_leaves")
@@ -835,38 +1055,171 @@ end
 function lottmapgen.birch_tree(x, y, z, area, data)
 	local c_birchtree = minetest.get_content_id("lottplants:birch_trunk")
 	local c_birchleaf = minetest.get_content_id("lottplants:birch_leaves")
-	for j = -5, 12 do
-		if j == 8 or j == 11 then
-			for i = -2, 2 do
-			for k = -2, 2 do
-				local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
-				if math.random(5) ~= 2 then
-					data[vil] = c_birchleaf
+	local dir = math.random(1,2)
+	local height = math.random(7, 8)
+	for j = -2, height do
+		if j >= height - 4 then
+			if dir == 1 then
+				for i = -2, 3 do
+				for k = -2, 2 do
+					if math.abs(i) + math.abs(k) < 4 then
+						local vil = area:index(x + i, y + j + 1, z + k)
+						if math.random(7) ~= 2 then
+							data[vil] = c_birchleaf
+						end
+					end
+				end
+				end
+			else
+				for i = -2, 2 do
+				for k = -2, 3 do
+					if math.abs(i) + math.abs(k) < 4 then
+						local vil = area:index(x + i, y + j + 1, z + k)
+						if math.random(7) ~= 2 then
+							data[vil] = c_birchleaf
+						end
+					end
+				end
 				end
 			end
+		elseif j == height - 5 then
+			if dir == 1 then
+				for i = -1, 2 do
+				for k = -1, 1 do
+					if math.abs(i) + math.abs(k) < 3 then
+						local vil = area:index(x + i, y + j + 1, z + k)
+						if math.random(7) ~= 2 then
+							data[vil] = c_birchleaf
+						end
+					end
+				end
+				end
+			else
+				for i = -1, 1 do
+				for k = -1, 2 do
+					if math.abs(i) + math.abs(k) < 3 then
+						local vil = area:index(x + i, y + j + 1, z + k)
+						if math.random(7) ~= 2 then
+							data[vil] = c_birchleaf
+						end
+					end
+				end
+				end
 			end
 		end
-		local vit = area:index(x, y + j, z)
-		data[vit] = c_birchtree
+		if dir == 1 then
+			if j == height - 3 then
+				local vit = area:index(x, y + j, z)
+				data[vit] = c_birchtree
+				vit = area:index(x + 1, y + j, z)
+				data[vit] = c_birchtree
+			elseif j == height - 2 then
+				local vit = area:index(x, y + j, z)
+				data[vit] = c_birchtree
+				vit = area:index(x + 2, y + j, z)
+				data[vit] = c_birchtree
+			elseif j >= height - 1  then
+				local vit = area:index(x - 1, y + j, z)
+				data[vit] = c_birchtree
+				vit = area:index(x + 2, y + j, z)
+				data[vit] = c_birchtree
+			else
+				local vit = area:index(x, y + j, z)
+				data[vit] = c_birchtree
+			end
+		else
+			if j == height - 3 then
+				local vit = area:index(x, y + j, z)
+				data[vit] = c_birchtree
+				vit = area:index(x, y + j, z + 1)
+				data[vit] = c_birchtree
+			elseif j == height - 2 then
+				local vit = area:index(x, y + j, z)
+				data[vit] = c_birchtree
+				vit = area:index(x, y + j, z + 2)
+				data[vit] = c_birchtree
+			elseif j >= height - 1  then
+				local vit = area:index(x, y + j, z - 1)
+				data[vit] = c_birchtree
+				vit = area:index(x, y + j, z + 2)
+				data[vit] = c_birchtree
+			else
+				local vit = area:index(x, y + j, z)
+				data[vit] = c_birchtree
+			end
+		end
 	end
 end
 
-function lottmapgen.short_elm_tree(x, y, z, area, data)
+function lottmapgen.elm_tree(x, y, z, area, data)
 	local c_tree = minetest.get_content_id("lottplants:elm_trunk")
 	local c_elmleaf = minetest.get_content_id("lottplants:elm_leaves")
-	for j = -5, 9 do
-		if j >= 7 then
+	for j = -2, 12 do
+		if j == 6 then
 			for i = -2, 2 do
 			for k = -2, 2 do
 				local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
-				if math.random(5) ~= 2 then
+				if math.random(6) ~= 2 then
 					data[vil] = c_elmleaf
 				end
 			end
 			end
+		elseif j == 7 then
+			for i = -3, 3 do
+			for k = -3, 3 do
+				local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+				if math.random(6) ~= 2 then
+					data[vil] = c_elmleaf
+				end
+			end
+			end
+		elseif j == 12 then
+			for i = -3, 3 do
+			for k = -3, 3 do
+				local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+				if math.random(6) ~= 2 then
+					data[vil] = c_elmleaf
+				end
+			end
+			end
+		elseif j > 7 then
+			for i = -5, 5 do
+			for k = -5, 5 do
+				if math.abs(i) + math.abs(k) < 8 then
+					local vil = area:index(x + i, y + j + math.random(0, 1), z + k)
+					if math.random(6) ~= 2 then
+						data[vil] = c_elmleaf
+					end
+				end
+			end
+			end
 		end
-		local vit = area:index(x, y + j, z)
-		data[vit] = c_tree
+		if j == 8 then
+			for i = -1, 1, 2 do
+				for k = -1, 1, 2 do
+					local vit = area:index(x + i, y + j, z + k)
+					data[vit] = c_tree
+				end
+			end
+		elseif j == 9 then
+			for i = -2, 2, 4 do
+				for k = -2, 2, 4 do
+					local vit = area:index(x + i, y + j, z + k)
+					data[vit] = c_tree
+				end
+			end
+		elseif j == 10 then
+			for i = -3, 3, 6 do
+				for k = -3, 3, 6 do
+					local vit = area:index(x + i, y + j, z + k)
+					data[vit] = c_tree
+				end
+			end
+		end
+		if j < 11 then
+			local vit = area:index(x, y + j, z)
+			data[vit] = c_tree
+		end
 	end
 end
 
@@ -911,7 +1264,7 @@ function lottmapgen.young_mallorn_tree(x, y, z, area, data)
 	end
 end
 
-function lottmapgen.large_oak_tree(x, y, z, area, data)
+function lottmapgen.dark_oak_tree(x, y, z, area, data)
 	local c_tree = minetest.get_content_id("lottplants:dark_oak_trunk")
 	local c_leaves = minetest.get_content_id("lottplants:dark_oak_leaves")
 	for j = -3, 7 do
@@ -956,7 +1309,7 @@ function lottmapgen.pine_tree(x, y, z, area, data, snow)
 	if snow == false then
 		c_snow = minetest.get_content_id("air")
 	end
-	for j = -4, 13 do
+	for j = -2, 13 do
 		if j == 3 or j == 6 or j == 9 or j == 12 then
 			for i = -2, 2 do
 			for k = -2, 2 do
@@ -995,49 +1348,8 @@ function lottmapgen.pine_tree(x, y, z, area, data, snow)
 	data[vilaa] = c_snow
 end
 
--- TODO Add fir logs and use this
-function lottmapgen.fir_tree(x, y, z, area, data)
-	local c_pinetree = minetest.get_content_id("lottplants:pine_tree")
-	local c_firleaf = minetest.get_content_id("lottplants:pine_needles")
-	local c_snow = minetest.get_content_id("lottitems:snow_layer")
-	for j = -4, 13 do
-		if j == 3 or j == 6 or j == 9 or j == 12 then
-			for i = -2, 2 do
-			for k = -2, 2 do
-				if math.abs(i) == 2 or math.abs(k) == 2 then
-					if math.random(5) ~= 2 then
-						local vil = area:index(x + i, y + j, z + k)
-						data[vil] = c_firleaf
-						local vila = area:index(x + i, y + j + 1, z + k)
-						data[vila] = c_snow
-					end
-				end
-			end
-			end
-		elseif j == 4 or j == 7 or j == 10 or j == 13 then
-			for i = -1, 1 do
-			for k = -1, 1 do
-				if not (i == 0 and j == 0) then
-					if math.random(7) ~= 2 then
-						local vil = area:index(x + i, y + j, z + k)
-						data[vil] = c_firleaf
-						local vila = area:index(x + i, y + j + 1, z + k)
-						data[vila] = c_snow
-					end
-				end
-			end
-			end
-		end
-		local vit = area:index(x, y + j, z)
-		data[vit] = c_pinetree
-	end
-	local vil = area:index(x, y + 14, z)
-	local vila = area:index(x, y + 15, z)
-	local vilaa = area:index(x, y + 16, z)
-	data[vil] = c_firleaf
-	data[vila] = c_firleaf
-	data[vilaa] = c_snow
-end
+-- TODO Add fir logs and a fir tree? 
+--(Removed old function lottmapgen.fir tree, which was identical to pine_tree)
 
 function lottmapgen.holly_tree(x, y, z, area, data)
 	local c_tree = minetest.get_content_id("lottplants:holly_trunk")
@@ -1227,7 +1539,7 @@ function lottmapgen.beech_tree(x, y, z, area, data)
 		end
 	end
 	end
-	for j = -3, t do
+	for j = -2, t do
 		data[area:index(x, y+j, z)] = c_tree
 	end
 end

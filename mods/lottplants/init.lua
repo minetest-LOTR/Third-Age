@@ -1,3 +1,5 @@
+lottplants = {}
+
 local modpath = minetest.get_modpath("lottplants")
 
 dofile(modpath .. "/trees/init.lua")

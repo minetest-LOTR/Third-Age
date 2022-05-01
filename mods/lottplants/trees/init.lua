@@ -1,3 +1,5 @@
+dofile(minetest.get_modpath("lottplants") .. "/trees/saplings.lua")
+
 --[[
 Young trunk nbs:
 1:

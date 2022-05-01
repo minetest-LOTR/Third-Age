@@ -30,8 +30,7 @@ lottmapgen.register_biome(8, {
 				lottmapgen.generate_tree(x, y, z, area, data,
 					"lottplants:birch_trunk", "lottplants:birch_leaves", 4)
 			elseif math.random(TREE7) == 3 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:elm_trunk", "lottplants:elm_leaves", 8)
+				lottmapgen.elm_tree(x, y, z, area, data)
 			elseif math.random(TREE9) == 4 then
 				lottmapgen.poplar_tree(x, y, z, area, data)
 			elseif math.random(PLANT13) == 5 then
@@ -62,8 +61,7 @@ lottmapgen.register_biome(8, {
 				lottmapgen.generate_tree(x, y, z, area, data,
 					"lottplants:oak_trunk", "lottplants:oak_leaves", 5)
 			elseif math.random(TREE9) == 2 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:birch_trunk", "lottplants:birch_leaves", 4)
+				lottmapgen.birch_tree(x, y, z, area, data)
 			elseif math.random(TREE9) == 3 then
 				lottmapgen.generate_bush(x, y, z, area, data,
 					"lottplants:oak_trunk", "lottplants:oak_leaves")
@@ -88,6 +86,8 @@ lottmapgen.register_biome(8, {
 				if math.random(TREE5) == 4 then
 					lottmapgen.generate_tree(x, y, z, area, data,
 						"lottplants:birch_trunk", "lottplants:birch_leaves", 4)
+				elseif math.random(TREE8) == 4 then
+					lottmapgen.birch_tree(x, y, z, area, data)
 				elseif math.random(TREE6) == 5 then
 					lottmapgen.generate_bush(x, y, z, area, data,
 						"lottplants:birch_trunk", "lottplants:birch_leaves")

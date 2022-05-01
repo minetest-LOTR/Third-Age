@@ -32,20 +32,13 @@ lottmapgen.register_biome(4, {
 						"lottplants:dark_oak_leaves",
 						math.random(5, 6))
 				elseif math.random(TREE8) == 8 then
-					lottmapgen.generate_large_tree(x, y, z, area, data,
-						"lottplants:beech_trunk",
-						"lottplants:beech_leaves",
-						math.random(8, 10))
+					lottmapgen.beech_tree(x, y, z, area, data)
 				elseif math.random(TREE5) == 3 then
 					lottmapgen.generate_tall_tree(x, y, z, area, data,
 						"lottplants:oak_trunk",
 						"lottplants:oak_leaves")
 				elseif math.random(TREE7) == 4 then
-					lottmapgen.generate_tree(x, y, z, area, data,
-						"lottplants:oak_trunk",
-						"lottplants:oak_leaves",
-						math.random(4, 5),
-						"lottitems:apple")
+					lottmapgen.apple_tree(x, y, z, area, data)
 				elseif math.random(PLANT4) == 5 then
 					lottmapgen.grass(data, vi, p2data)
 				elseif math.random(PLANT8) == 6 then

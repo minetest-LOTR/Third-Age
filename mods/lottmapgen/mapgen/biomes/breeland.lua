@@ -16,24 +16,21 @@ lottmapgen.register_biome(6, {
 				lottmapgen.grass(data, vi, p2data)
 			end
 		else
-			if math.random(TREE3) == 2 then
+			if math.random(TREE4) == 2 then
 				lottmapgen.generate_tree(x, y, z, area, data,
 					"lottplants:birch_trunk",
 					"lottplants:birch_leaves",
 					math.random(5, 7))
+			elseif math.random(TREE7) == 2 then
+				lottmapgen.birch_tree(x, y, z, area, data)
 			elseif math.random(TREE5) == 3 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:apple_trunk",
-					"lottplants:apple_leaves", 5,
-					"lottitems:apple")
+				lottmapgen.apple_tree(x, y, z, area, data)
 			elseif math.random(TREE3) == 5 then
 				lottmapgen.generate_tree(x, y, z, area, data,
 					"lottplants:oak_trunk",
 					"lottplants:oak_leaves", 4)
-			elseif math.random(TREE4) == 6 then
-				lottmapgen.generate_tree(x, y, z, area, data,
-					"lottplants:elm_trunk",
-					"lottplants:elm_leaves", 9)
+			elseif math.random(TREE7) == 6 then
+				lottmapgen.elm_tree(x, y, z, area, data)
 			elseif math.random(PLANT6) == 7 then
 				lottmapgen.basic_flowers(data, vi, p2data)
 			elseif math.random(PLANT2) == 1 then
