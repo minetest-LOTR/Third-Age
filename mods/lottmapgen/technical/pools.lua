@@ -5,7 +5,7 @@
 local YMAX = 500 -- Maximum altitude for pools
 local FLOW = 256
 
-local function get_walkable(c_id)
+function lottmapgen.get_walkable(c_id)
 	if not c_id then
 		return false
 	end
@@ -16,7 +16,7 @@ local function get_walkable(c_id)
 	return false
 end
 
-local function get_grass(c_id)
+function lottmapgen.get_grass(c_id)
 	if not c_id then
 		return false
 	end
@@ -27,7 +27,7 @@ local function get_grass(c_id)
 	return false
 end
 
-local function get_tree(c_id)
+function lottmapgen.get_tree(c_id)
 	if not c_id then
 		return false
 	end
@@ -41,7 +41,7 @@ local function get_tree(c_id)
 end
 
 -- TODO: Support fruit trees when added
-local function remove_tree(c_tree, x, y, z, area, data)
+function lottmapgen.remove_tree(c_tree, x, y, z, area, data)
 	-- Find leaves
 	local node = minetest.get_name_from_content_id(c_tree)
 	local c_leaves
@@ -96,7 +96,7 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 				break
 			elseif c_node == c_watsour then
 				break
-			elseif get_grass(c_node) then
+			elseif lottmapgen.get_grass(c_node) then
 				yasurf = y + 1
 				break
 			end
@@ -109,7 +109,7 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 				if xcen + ser == x1 then
 					abort = true
 				elseif c_node ~= c_air
-				and not get_walkable(c_node) then
+				and not lottmapgen.get_walkable(c_node) then
 					break
 				end
 			end
@@ -119,7 +119,7 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 				if xcen - ser == x0 then
 					abort = true
 				elseif c_node ~= c_air
-				and not get_walkable(c_node) then
+				and not lottmapgen.get_walkable(c_node) then
 					break
 				end
 			end
@@ -129,7 +129,7 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 				if zcen + ser == z1 then
 					abort = true
 				elseif c_node ~= c_air
-				and not get_walkable(c_node) then
+				and not lottmapgen.get_walkable(c_node) then
 					break
 				end
 			end
@@ -139,7 +139,7 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 				if zcen - ser == z0 then
 					abort = true
 				elseif c_node ~= c_air
-				and not get_walkable(c_node) then
+				and not lottmapgen.get_walkable(c_node) then
 					break
 				end
 			end
@@ -150,7 +150,7 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 			local vi = area:index(xcen, yasurf, zcen)
 			water_map[vi] = 1
 			local flab = false -- flow abort
-			for flow = 1, FLOW do
+			for flow = 1, 256 do --FLOW
 				for z = z0, z1 do
 					for x = x0, x1 do
 						local vif = area:index(x, yasurf, z)
@@ -164,23 +164,23 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 								local vin = area:index(x, yasurf, z + 1)
 								local vis = area:index(x, yasurf, z - 1)
 								if data[vie] == c_air
-								or get_walkable(data[vie])
-								or get_tree(data[vie]) then
+								or lottmapgen.get_walkable(data[vie])
+								or lottmapgen.get_tree(data[vie]) then
 									water_map[vie] = 1
 								end
 								if data[viw] == c_air
-								or get_walkable(data[viw])
-								or get_tree(data[viw]) then
+								or lottmapgen.get_walkable(data[viw])
+								or lottmapgen.get_tree(data[viw]) then
 									water_map[viw] = 1
 								end
 								if data[vin] == c_air
-								or get_walkable(data[vin])
-								or get_tree(data[vin]) then
+								or lottmapgen.get_walkable(data[vin])
+								or lottmapgen.get_tree(data[vin]) then
 									water_map[vin] = 1
 								end
 								if data[vis] == c_air
-								or get_walkable(data[vis])
-								or get_tree(data[vis]) then
+								or lottmapgen.get_walkable(data[vis])
+								or lottmapgen.get_tree(data[vis]) then
 									water_map[vis] = 1
 								end
 							end
@@ -201,23 +201,23 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 				for x = x0, x1 do
 					local vi = area:index(x, yasurf, z)
 					if water_map[vi] == 1 then
-						if get_tree(data[vi]) == 1 then
-							remove_tree(data[vi], x, yasurf, z, area, data)
+						if lottmapgen.get_tree(data[vi]) == 1 then
+							lottmapgen.remove_tree(data[vi], x, yasurf, z, area, data)
 						end
 						data[vi] = c_watsour
 						local viia = area:index(x, yasurf + 1, z)
 						data[viia] = c_air
 						for y = yasurf + 1, yasurf + 9 do
 							local via = area:index(x, y, z)
-							if get_tree(data[via]) then
+							if lottmapgen.get_tree(data[via]) then
 								data[via] = c_air
 							end
 						end
 						for y = yasurf - 1, y0, -1 do
 							local viu = area:index(x, y, z)
 							if data[viu] == c_air
-							or get_walkable(data[viu])
-							or get_tree(data[viu]) then
+							or lottmapgen.get_walkable(data[viu])
+							or lottmapgen.get_tree(data[viu]) then
 								data[viu] = c_watsour
 							else
 								data[viu] = c_dirt
@@ -234,7 +234,7 @@ function lottmapgen.generate_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 end
 
 function lottmapgen.generate_lava_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
-	if y0 > -120 then
+	if y0 > -160 then
 		return
 	end
 	local c_air = minetest.get_content_id("air")
@@ -301,7 +301,7 @@ function lottmapgen.generate_lava_pools(x0, y0, z0, x1, y1, z1, vm, area, data)
 			local vi = area:index(xcen, yasurf, zcen)
 			lava_map[vi] = 1
 			local flab = false -- flow abort
-			for flow = 1, FLOW do
+			for flow = 1, 256 do -- FLOW
 				for z = z0, z1 do
 					for x = x0, x1 do
 						local vif = area:index(x, yasurf, z)

@@ -191,12 +191,34 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type = "scatter",
 	ore = "lottores:iron_ore",
-	wherein = {"air"},
-	clust_scarcity = 12 * 12 * 12,
+	wherein = {"lottitems:stone"},
+	clust_scarcity = 20 * 20 * 20,
+	clust_size = 6,
+	clust_num_ores = 20,
+	y_min = -30000,
+	y_max = -180,
+})
+
+minetest.register_ore({
+	ore_type = "scatter",
+	ore = "lottores:iron_ore",
+	wherein = {"lottitems:desert_stone"},
+	clust_scarcity = 10 * 10 * 10,
+	clust_size = 3,
+	clust_num_ores = 8,
+	y_min = -200,
+	y_max = -2,
+})
+
+minetest.register_ore({
+	ore_type = "scatter",
+	ore = "lottores:iron_ore",
+	wherein = {"lottitems:stone"},
+	clust_scarcity = 15 * 15 * 15,
 	clust_size = 2,
-	clust_num_ores = 2,
-	y_min = 260,
-	y_max = 300,
+	clust_num_ores = 3,
+	y_min = -200,
+	y_max = -20,
 })
 
 -- Should be last/one of the last ores defined

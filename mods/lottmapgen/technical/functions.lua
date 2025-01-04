@@ -156,85 +156,83 @@ function lottmapgen.farming_plants_rare(data, vi, p2data)
 	end
 end
 
-local basic_flowers = {
-	"chrysanthemum_green",
-	"dandelion_white",
-	"dandelion_yellow",
-	"geranium",
-	"rose",
-	"tulip",
-	"violet",
-}
-
 function lottmapgen.basic_flowers(data, vi, p2data)
+	local basic_flowers = {
+		"chrysanthemum_green",
+		"dandelion_white",
+		"dandelion_yellow",
+		"geranium",
+		"rose",
+		"tulip",
+		"violet",
+	}
 	local rand = math.random(#basic_flowers)
 	local c_flower = minetest.get_content_id("lottplants:" .. basic_flowers[rand])
 	data[vi] = c_flower
 end
 
-local petuniae = {
-	"white",
-	"pink",
-	"blue"
-}
+
 
 function lottmapgen.petuniae(data, vi, p2data)
+	local petuniae = {
+		"white",
+		"pink",
+		"blue"
+	}
 	local rand = math.random(#petuniae)
 	local c_flower = minetest.get_content_id("lottplants:petunia_" .. petuniae[rand])
 	data[vi] = c_flower
 end
 
-local mountain_flowers = {
-	"parnassus",
-	"snow_glory",
-	"sericea",
-}
+
 
 function lottmapgen.mountain_flowers(data, vi, p2data)
+	local mountain_flowers = {
+		"parnassus",
+		"snow_glory",
+		"sericea",
+	}
 	local rand = math.random(#mountain_flowers)
 	local c_flower = minetest.get_content_id("lottplants:" .. mountain_flowers[rand])
 	data[vi] = c_flower
 end
 
-local desert_flowers = {
-	"desert_canaigre",
-	"desert_bigelow",
-	"desert_plume",
-	"desert_phacelia",
-	"desert_poppy",
-	"desert_star",
-}
-
 function lottmapgen.desert_flowers(data, vi, p2data)
+	local desert_flowers = {
+		"desert_canaigre",
+		"desert_bigelow",
+		"desert_plume",
+		"desert_phacelia",
+		"desert_poppy",
+		"desert_star",
+	}
 	local rand = math.random(#desert_flowers)
 	local c_flower = minetest.get_content_id("lottplants:" .. desert_flowers[rand])
 	data[vi] = c_flower
 end
 
-local gerberae = {
-	"orange",
-	"red",
-	"pink",
-	"yellow"
-}
-
 function lottmapgen.gerberae(data, vi, p2data)
+	local gerberae = {
+		"orange",
+		"red",
+		"pink",
+		"yellow"
+	}
 	local rand = math.random(#gerberae)
 	local c_flower = minetest.get_content_id("lottplants:gerbera_" .. gerberae[rand])
 	data[vi] = c_flower
 end
 
-local shire_flowers = {
-	"iris_blue",
-	"iris_purple",
-	"buttercup",
-	"amaryllis_pink",
-	"amaryllis_red",
-	"amaryllis_white",
-	"lilly",
-}
-
 function lottmapgen.shire_flowers(data, vi, p2data)
+	local shire_flowers = {
+		"iris_blue",
+		"iris_purple",
+		"buttercup",
+		"amaryllis_pink",
+		"amaryllis_red",
+		"amaryllis_white",
+		"lilly",
+	}
 	local rand = math.random(#shire_flowers + 16)
 	if rand > #shire_flowers + 5 then
 		lottmapgen.basic_flowers(data, vi, p2data)
@@ -501,7 +499,7 @@ function lottmapgen.cedar_tree(x, y, z, area, data)
 	end
 end
 
-local function ash_branch(x, y, z, area, data)
+function lottmapgen.ash_branch(x, y, z, area, data)
 	local c_tree = minetest.get_content_id("lottplants:ash_trunk")
 	local c_leaves = minetest.get_content_id("lottplants:ash_leaves")
 	local dir = math.random(4)
@@ -582,7 +580,7 @@ function lottmapgen.ash_tree(x, y, z, area, data, tree, leaves)
 			end
 			end
 		elseif j >= 5 and math.random(3) == 3 then
-			ash_branch(x, y + j, z, area, data)
+			lottmapgen.ash_branch(x, y + j, z, area, data)
 		end
 		local vit = area:index(x, y + j, z)
 		data[vit] = c_tree

@@ -1,3 +1,7 @@
+lottmapgen = core.ipc_get("lottmapgen:mapgen")
+
+dofile(minetest.get_modpath("lottmapgen") .. "/mapgen/biomes/init.lua")
+
 local np_temp = {
 	offset = 0,
 	scale = 1,
@@ -98,7 +102,7 @@ function minetest.get_mapgen_object(param)
 end
 
 -- On generated function
-minetest.register_on_generated(function(minp, maxp, seed)
+minetest.register_on_generated(function(vm, minp, maxp, seed)
 	if minp.y < -31000 or minp.y > 5000 then
 		return
 	end
@@ -111,8 +115,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	local y0 = minp.y
 	local z0 = minp.z
 
-	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
-	local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
+	local pos1, pos2 = vm:get_emerged_area()
+	local area = VoxelArea:new({MinEdge = pos1, MaxEdge = pos2})
+
 	vm:get_data(data)
 	vm:get_param2_data(p2data)
 
@@ -183,8 +188,8 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			local n_x = x + math.floor(nvals_x[nixz] * border_amp) -- Biome edge noise.
 			local n_z = z + math.floor(nvals_z[nixz] * border_amp)
 			local noise_1 = nvals_dec[nixz]
-			local biome, grassp2 = lottmapgen.biomes(n_x, n_z - 1)
-			local height = lottmapgen.height(n_x, n_z - 1)
+			local biome, grassp2 = lottmapgen.biomes(n_x, n_z - 1, lottmapgen)
+			local height = lottmapgen.height(n_x, n_z - 1, lottmapgen)
 			local stone_depth = math.floor(((nvals_ter[nixz] + 1)) *
 				(height * math.abs(math.abs(nvals_terflat[nixz] / (height / 20)) - 1.01)))
 			if lottmapgen.biome[biome] and lottmapgen.biome[biome].dungeon_wall then
@@ -313,135 +318,52 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	vm:set_lighting({day=0, night=0})
 	vm:calc_lighting()
 	vm:update_liquids()
-	vm:write_to_map()
+	--vm:write_to_map()
 	local chugent = math.ceil((os.clock() - t1) * 1000)
 	--print(chugent)
 	table.insert(times, chugent)
 end)
 
-minetest.register_ore({
-	ore_type = "blob",
-	ore = "lottitems:dirt",
-	wherein = {"lottitems:stone", "lottitems:red_stone", "lottitems:sandstone",
-		"lottitems:blue_stone"},
-	clust_scarcity = 25 * 25 * 25,
-	clust_size = 5,
-	y_min = -31000,
-	y_max = 100,
-	noise_threshold = 0.0,
-	noise_params = {
-		offset = 0.5,
-		scale = 0.2,
-		spread = {x = 5, y = 5, z = 5},
-		seed = 32423,
-		octaves = 1,
-		persist = 0,
-	},
-})
-
-minetest.register_ore({
-	ore_type = "blob",
-	ore = "lottitems:gravel",
-	wherein = {"lottitems:stone", "lottitems:red_stone", "lottitems:sandstone",
-		"lottitems:blue_stone"},
-	clust_scarcity = 25 * 25 * 25,
-	clust_size = 5,
-	y_min = -31000,
-	y_max = 100,
-	noise_threshold = 0.0,
-	noise_params = {
-		offset = 0.5,
-		scale = 0.2,
-		spread = {x = 5, y = 5, z = 5},
-		seed = 53765,
-		octaves = 1,
-		persist = 0,
-	},
-})
-
-minetest.register_ore({
-	ore_type = "blob",
-	ore = "lottitems:dark_gravel",
-	wherein = {"lottitems:stone", "lottitems:red_stone", "lottitems:sandstone",
-		"lottitems:blue_stone"},
-	clust_scarcity = 25 * 25 * 25,
-	clust_size = 5,
-	y_min = -31000,
-	y_max = 100,
-	noise_threshold = 0.0,
-	noise_params = {
-		offset = 0.5,
-		scale = 0.2,
-		spread = {x = 5, y = 5, z = 5},
-		seed = 91322,
-		octaves = 1,
-		persist = 0,
-	},
-})
-
-minetest.register_ore({
-	ore_type = "blob",
-	ore = "lottitems:sand",
-	wherein = {"lottitems:stone", "lottitems:red_stone", "lottitems:sandstone",
-		"lottitems:blue_stone"},
-	clust_scarcity = 25 * 25 * 25,
-	clust_size = 5,
-	y_min = -31000,
-	y_max = 15,
-	noise_threshold = 0.0,
-	noise_params = {
-		offset = 0.5,
-		scale = 0.2,
-		spread = {x = 5, y = 5, z = 5},
-		seed = 12389,
-		octaves = 1,
-		persist = 0,
-	},
-})
-
-minetest.register_ore({
-	ore_type = "blob",
-	ore = "lottitems:desert_sand",
-	wherein = {"lottitems:desert_sandstone"},
-	clust_scarcity = 15 * 15 * 15,
-	clust_size = 5,
-	y_min = -31000,
-	y_max = 15,
-	noise_threshold = 0.0,
-	noise_params = {
-		offset = 0.5,
-		scale = 0.2,
-		spread = {x = 5, y = 5, z = 5},
-		seed = 37835,
-		octaves = 1,
-		persist = 0,
-	},
-})
-
-minetest.register_ore({
-	ore_type = "blob",
-	ore = "lottitems:gravel",
-	wherein = {"lottitems:desert_sandstone"},
-	clust_scarcity = 15 * 15 * 15,
-	clust_size = 5,
-	y_min = -31000,
-	y_max = 15,
-	noise_threshold = 0.0,
-	noise_params = {
-		offset = 0.5,
-		scale = 0.2,
-		spread = {x = 5, y = 5, z = 5},
-		seed = 37835,
-		octaves = 1,
-		persist = 0,
-	},
-})
-
-minetest.register_on_shutdown(function()
+--[[minetest.register_on_shutdown(function()
 	local t = 0
 	for i,v in pairs(times) do
 		t = t + v
 	end
 	t = t / #times
 	print("Number of chunks: " .. #times .. "    Average Mapgen Time per chunk: " .. t)
-end)
+end)]]
+
+
+-- Chance variables:
+TREE1 = 30
+TREE2 = 50
+TREE3 = 100
+TREE4 = 200
+TREE5 = 300
+TREE6 = 500
+TREE7 = 750
+TREE8 = 1000
+TREE9 = 2000
+TREE10 = 5000
+
+PLANT1 = 3
+PLANT2 = 5
+PLANT3 = 10
+PLANT4 = 20
+PLANT5 = 50
+PLANT6 = 100
+PLANT7 = 200
+PLANT8 = 500
+PLANT9 = 750
+PLANT10 = 1000
+PLANT11 = 2000
+PLANT12 = 5000
+PLANT13 = 10000
+PLANT14 = 100000
+PLANT15 = 500000
+
+BUILDING1 = 50000
+BUILDING2 = 100000
+BUILDING3 = 250000
+BUILDING4 = 500000
+BUILDING5 = 1000000

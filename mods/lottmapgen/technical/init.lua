@@ -23,30 +23,32 @@ local height_data = height_file:read("*a")
 biome_file:close()
 height_file:close()
 
-local biomes = minetest.deserialize(minetest.decompress(biome_data))
-local height = minetest.deserialize(minetest.decompress(height_data))
+-- Globals to work with async mapgen
+lottmapgen.biome_data = minetest.deserialize(minetest.decompress(biome_data))
+lottmapgen.height_data = minetest.deserialize(minetest.decompress(height_data))
 
 function lottmapgen.register_biome(id, table)
 	lottmapgen.biome[id] = table
 end
 
-local grassp2 = 0
+lottmapgen.grassp2 = 0
 
-local function gp2(value)
-	if grassp2 and grassp2 > value then
+function lottmapgen.gp2(value)
+	if lottmapgen.grassp2 and lottmapgen.grassp2 > value then
 		return
 	end
-	grassp2 = value
+	lottmapgen.grassp2 = value
 end
 
 function lottmapgen.biomes(noisy_x, noisy_z)
+	local biomes = lottmapgen.biome_data
 	local small_x = math.floor(noisy_x / 160)
 	local small_z = math.floor(noisy_z / 160)
 	local dx = math.abs(small_x - (noisy_x / 160))
 	local dz = math.abs(small_z - (noisy_z / 160))
 	small_x = small_x + 200
 	small_z = (small_z - 200) * -1
-	grassp2 = 0
+	lottmapgen.grassp2 = 0
 	if biomes[small_z] and biomes[small_z][small_x] then
 		local biome = biomes[small_z][small_x]
 		for nz = -1, 1 do
@@ -59,26 +61,26 @@ function lottmapgen.biomes(noisy_x, noisy_z)
 						local dt = (ndx + 0.2) + (dz + 0.2) - 1.4
 						if dt < 0.6 then dt = 0.6 end
 						if dt > 1 then dt = 1 end
-						gp2(math.abs((dt * 160) - 96))
+						lottmapgen.gp2(math.abs((dt * 160) - 96))
 					end
 				elseif nz == -1 and nx == 0 then
 					if dz > 0.6 then
-						gp2(math.abs((dz * 160) - 96))
+						lottmapgen.gp2(math.abs((dz * 160) - 96))
 					end
 				elseif nz == -1 and nx == 1 then
 					if dx > 0.6 and dz > 0.6 then
 						local dt = ((dx + 0.2) + (dz + 0.2)) - 1.4
 						if dt < 0.6 then dt = 0.6 end
 						if dt > 1 then dt = 1 end
-						gp2(math.floor(math.abs((dt * 160) - 96)))
+						lottmapgen.gp2(math.floor(math.abs((dt * 160) - 96)))
 					end
 				elseif nz == 0 and nx == -1 then
 					if dx < 0.4 then
-						gp2(math.abs((dx * 160) - 63))
+						lottmapgen.gp2(math.abs((dx * 160) - 63))
 					end
 				elseif nz == 0 and nx == 1 then
 					if dx > 0.6 then
-						gp2(math.abs((dx * 160) - 96))
+						lottmapgen.gp2(math.abs((dx * 160) - 96))
 					end
 				elseif nz == 1 and nx == -1 then
 					if dz < 0.4 and dx < 0.4 then
@@ -87,11 +89,11 @@ function lottmapgen.biomes(noisy_x, noisy_z)
 						local dt = (dz - 0.2) + (dx - 0.2) + 0.4
 						if dt < 0 then dt = 0 end
 						if dt > 0.4 then dt = 0.4 end
-						gp2(math.abs((dt * 160) - 63))
+						lottmapgen.gp2(math.abs((dt * 160) - 63))
 					end
 				elseif nz == 1 and nx == 0 then
 					if dz < 0.4 then
-						gp2(math.abs((dz * 160) - 63))
+						lottmapgen.gp2(math.abs((dz * 160) - 63))
 					end
 				elseif nz == 1 and nx == 1 then
 					if dx > 0.6 and dz < 0.4 then
@@ -99,20 +101,21 @@ function lottmapgen.biomes(noisy_x, noisy_z)
 						local dt = (ndx - 0.2) + (dz - 0.2) + 0.4
 						if dt < 0 then dt = 0 end
 						if dt > 0.4 then dt = 0.4 end
-						gp2(math.abs((dt * 160) - 63))
+						lottmapgen.gp2(math.abs((dt * 160) - 63))
 					end
 				end
 			end
 		end
 		end
 		--print(grassp2)
-		return biome, grassp2
+		return biome, lottmapgen.grassp2
 	else
 		return 99
 	end
 end
 
 function lottmapgen.height(noisy_x, noisy_z)
+	local height = lottmapgen.height_data
 	local small_x = math.floor(noisy_x / 160)
 	local small_z = math.floor(noisy_z / 160)
 	local dx = math.abs(small_x - (noisy_x / 160))
@@ -193,6 +196,7 @@ local n_z = {
 }
 
 function lottmapgen.get_biome_at_pos(pos)
+	local biomes = lottmapgen.biome_data
 	local nx = math.floor(minetest.get_perlin(n_x):get_2d({x=pos.x,y=pos.z}) * 128)
 	local nz = math.floor(minetest.get_perlin(n_z):get_2d({x=pos.x,y=pos.z}) * 128)
 	local x = math.floor((pos.x + nx) / 160) + 200

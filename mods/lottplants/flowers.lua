@@ -242,6 +242,7 @@ minetest.register_node("lottplants:sunflower", {
 	tiles = {"lottplants_sunflower.png"},
 	walkable = false,
 	buildable_to = true,
+	use_texture_alpha = true,
 	groups = {dig_immediate=3, oddly_breakable_by_hand=1, flora=1},
 	selection_box = box,
 	collision_box = box,

@@ -18,4 +18,7 @@ minetest.register_node("lottmapgen:tmp", {
 })
 
 dofile(modpath .. "/biomes/init.lua")
-dofile(modpath .. "/mapgen.lua")
+dofile(modpath .. "/ores.lua")
+
+core.ipc_set("lottmapgen:mapgen", lottmapgen)
+core.register_mapgen_script(modpath .. "/mapgen.lua")
