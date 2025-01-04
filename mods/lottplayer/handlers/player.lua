@@ -341,7 +341,7 @@ minetest.register_on_joinplayer(function(player)
 	race = tonumber(race)
 	lottplayer.set_player_props(race, player)
 	local meta = player:get_meta()
-	meta:set_string("lott:bow_state", true)
+	meta:set_string("lott:bow_state", "")
 end)
 
 -- Changing races

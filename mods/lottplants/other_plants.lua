@@ -16,6 +16,7 @@ minetest.register_node("lottplants:brambles_of_mordor", {
 	walkable = false,
 	waving = 1,
 	buildable_to = true,
+	use_texture_alpha = true,
 	groups = {snappy=3,flammable=2,flower=1,flora=1,attached_node=1,color_grey=1},
 	selection_box = {
 		type = "fixed",
@@ -64,7 +65,8 @@ for i = 1,2 do
 		floodable = true,
 		drop = "lottplants:waterlily_1",
 		liquids_pointable = true,
-		groups = {snappy = 3, flower = 1, flammable = 1},
+		use_texture_alpha = true,
+		groups = {snappy = 3, flower = 1, flammable = 1, bouncy = 75},
 		--sounds = default.node_sound_leaves_defaults(),
 		node_placement_prediction = "",
 		on_place = function(itemstack, placer, pointed_thing)
@@ -93,7 +95,8 @@ for i = 3,4 do
 		floodable = true,
 		drop = "lottplants:waterlily_1",
 		liquids_pointable = true,
-		groups = {snappy = 3, flower = 1, flammable = 1},
+		use_texture_alpha = true,
+		groups = {snappy = 3, flower = 1, flammable = 1, bouncy = 75},
 		--sounds = default.node_sound_leaves_defaults(),
 		node_placement_prediction = "",
 		on_place = function(itemstack, placer, pointed_thing)

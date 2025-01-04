@@ -59,6 +59,7 @@ for i, v in pairs(lottplayer.races) do
 	minetest.register_node("lottplayer:" .. v[1], {
 		description = lott.str_to_desc(v[1]),
 		tiles = {"blank.png", "blank.png", "blank.png", "lottplayer_" .. v[1] .. ".png", "blank.png", "blank.png", "blank.png"},
+		use_texture_alpha = "clip",
 		drawtype = "mesh",
 		paramtype = "light",
 		paramtype2 = "facedir",
@@ -81,7 +82,7 @@ for i, v in pairs(lottplayer.races) do
 				"lottplayer:race_info_" .. i, 
 				race_form(v))
 		end,
-		groups = {pickaxe = 1},
+		groups = {pickaxe = 1, not_in_creative_inventory=1},
 	})
 end
 

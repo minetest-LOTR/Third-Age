@@ -96,8 +96,8 @@ minetest.register_node("lottitems:sand", {
 	drop = {
 		max_items = 2,
 		items = {
-			{items = {"lottitems:flint"}, rarity = 116},
-			{items = {"lottitems:dirt"}}
+			{items = {"lottitems:flint"}, rarity = 256},
+			{items = {"lottitems:sand"}}
 		}
 	},
 })
@@ -110,8 +110,8 @@ minetest.register_node("lottitems:desert_sand", {
 	drop = {
 		max_items = 2,
 		items = {
-			{items = {"lottitems:flint"}, rarity = 116},
-			{items = {"lottitems:dirt"}}
+			{items = {"lottitems:flint"}, rarity = 256},
+			{items = {"lottitems:desert_sand"}}
 		}
 	},
 })
@@ -124,8 +124,8 @@ minetest.register_node("lottitems:silver_sand", {
 	drop = {
 		max_items = 2,
 		items = {
-			{items = {"lottitems:flint"}, rarity = 116},
-			{items = {"lottitems:dirt"}}
+			{items = {"lottitems:flint"}, rarity = 256},
+			{items = {"lottitems:silver_sand"}}
 		}
 	},
 })
@@ -140,7 +140,7 @@ minetest.register_node("lottitems:gravel", {
 		max_items = 2,
 		items = {
 			{items = {"lottitems:flint"}, rarity = 16},
-			{items = {"lottitems:dirt"}}
+			{items = {"lottitems:gravel"}}
 		}
 	},
 })
@@ -154,7 +154,7 @@ minetest.register_node("lottitems:dark_gravel", {
 		max_items = 2,
 		items = {
 			{items = {"lottitems:flint"}, rarity = 16},
-			{items = {"lottitems:dirt"}}
+			{items = {"lottitems:dark_gravel"}}
 		}
 	},
 })
